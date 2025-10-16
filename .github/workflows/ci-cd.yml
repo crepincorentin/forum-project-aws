@@ -32,10 +32,11 @@ jobs:
         working-directory: ./api
         run: npm audit --audit-level=moderate
 
-      - name: Gitleaks
+      - name: Gitleaks Secret Scan
         uses: gitleaks/gitleaks-action@v2
-        with:
-          config-path: ""
+        env:
+            GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
 
   test:
     name: Tests API
