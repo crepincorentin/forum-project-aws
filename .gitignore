@@ -36,6 +36,10 @@ terraform/*.tfvars
 terraform/terraform.tfstate.backup
 terraform/.terraform.lock.hcl
 terraform/crash.log
+terraform/*.pem
+terraform/*.key
+*.pem
+*.key
 
 # Test coverage
 coverage/
