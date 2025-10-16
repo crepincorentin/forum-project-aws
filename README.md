@@ -15,7 +15,6 @@ Application de forum anonyme déployée sur AWS avec un pipeline CI/CD complet u
 - [Pipeline CI/CD](#-pipeline-cicd)
 - [Structure du projet](#-structure-du-projet)
 - [Configuration](#-configuration)
-- [Contribution](#-contribution)
 
 ## 🏗️ Architecture
 
@@ -291,35 +290,6 @@ Après le déploiement, le pipeline affiche :
 - 🚫 Clés SSH exclues du dépôt
 - 🌐 CORS configuré dynamiquement
 
-## 🐛 Dépannage
-
-### Le pipeline échoue sur "Security Group already exists"
-Le workflow inclut maintenant un import automatique. Si le problème persiste :
-```bash
-cd terraform
-terraform destroy -auto-approve
-```
-
-### L'API ne répond pas
-Vérifier les logs Docker sur l'instance EC2 :
-```bash
-ssh -i ~/.ssh/your-key.pem ubuntu@<IP_API>
-sudo docker logs api
-```
-
-### Le frontend n'affiche pas les messages
-Vérifier la console du navigateur et s'assurer que `API_URL` est correctement configuré.
-
-## 🤝 Contribution
-
-Les contributions sont les bienvenues ! Pour contribuer :
-
-1. Fork le projet
-2. Créez une branche (`git checkout -b feature/amazing-feature`)
-3. Committez vos changements (`git commit -m 'feat: add amazing feature'`)
-4. Pushez vers la branche (`git push origin feature/amazing-feature`)
-5. Ouvrez une Pull Request
-
 ## 📄 Licence
 
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
@@ -328,14 +298,3 @@ Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 **Corentin Crepin**
 - GitHub: [@crepincorentin](https://github.com/crepincorentin)
-
-## 🙏 Remerciements
-
-- AWS pour l'infrastructure cloud
-- Docker pour la conteneurisation
-- Terraform pour l'IaC
-- GitHub Actions pour le CI/CD
-
----
-
-⭐ Si ce projet vous a été utile, n'hésitez pas à lui donner une étoile !
