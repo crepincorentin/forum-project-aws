@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: ["http://localhost:8080"], // autorise ton front local
     methods: ["GET", "POST"],
-  })
+  }),
 );
 
 app.use(bodyParser.json());

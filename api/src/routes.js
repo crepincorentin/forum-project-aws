@@ -6,7 +6,9 @@ const router = express.Router();
 // GET - Liste des messages
 router.get("/messages", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM messages ORDER BY created_at DESC");
+    const result = await pool.query(
+      "SELECT * FROM messages ORDER BY created_at DESC",
+    );
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -17,12 +19,13 @@ router.get("/messages", async (req, res) => {
 // POST - Ajouter un message
 router.post("/messages", async (req, res) => {
   const { pseudonyme, contenu } = req.body;
-  if (!pseudonyme || !contenu) return res.status(400).json({ error: "Champs manquants" });
+  if (!pseudonyme || !contenu)
+    return res.status(400).json({ error: "Champs manquants" });
 
   try {
     await pool.query(
       "INSERT INTO messages (pseudonyme, contenu) VALUES ($1, $2)",
-      [pseudonyme, contenu]
+      [pseudonyme, contenu],
     );
     res.status(201).json({ success: true });
   } catch (err) {
