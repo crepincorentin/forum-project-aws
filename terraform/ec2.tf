@@ -69,7 +69,7 @@ resource "aws_instance" "api" {
                 -e DB_PASSWORD=${var.db_password} \
                 -e DB_NAME=forum \
                 -e DB_PORT=5432 \
-                -e CORS_ORIGIN=http://${aws_instance.front.public_ip} \
+                -e CORS_ORIGIN="*" \
                 corentin123/forum-api:${var.docker_tag}
               
               echo "API setup completed!"
@@ -105,9 +105,8 @@ resource "aws_instance" "front" {
               echo "Pulling frontend image from Docker Hub..."
               docker pull corentin123/forum-frontend:${var.docker_tag}
               
-              echo "Running container with API URL..."
+              echo "Running container with placeholder..."
               docker run -d -p 80:80 --name frontend \
-                -e API_URL=http://${aws_instance.api.public_ip}:3000 \
                 corentin123/forum-frontend:${var.docker_tag}
               
               echo "User-data script completed!"
