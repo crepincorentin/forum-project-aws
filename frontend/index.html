@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forum Anonyme</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>💬 Forum Anonyme</h1>
+
+      <form id="form">
+        <input type="text" id="pseudo" placeholder="Ton pseudonyme" required />
+        <textarea id="message" placeholder="Exprime-toi..." required></textarea>
+        <button type="submit">Publier</button>
+      </form>
+
+      <h2>Derniers messages</h2>
+      <div id="messages" class="messages"></div>
+    </div>
+
+    <footer>
+      <p>🚀 Propulsé par Node.js + Docker + AWS</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
