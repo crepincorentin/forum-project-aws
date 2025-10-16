@@ -60,7 +60,7 @@ resource "aws_instance" "api" {
               sleep 10
               
               echo "Pulling API image from Docker Hub..."
-              docker pull corentin123/forum-api:latest
+              docker pull corentin123/forum-api:${var.docker_tag}
               
               echo "Running API container..."
               docker run -d -p 3000:3000 --name api \
@@ -69,7 +69,8 @@ resource "aws_instance" "api" {
                 -e DB_PASSWORD=${var.db_password} \
                 -e DB_NAME=forum \
                 -e DB_PORT=5432 \
-                corentin123/forum-api:latest
+                -e CORS_ORIGIN=http://${aws_instance.front.public_ip} \
+                corentin123/forum-api:${var.docker_tag}
               
               echo "API setup completed!"
               docker ps
@@ -102,10 +103,12 @@ resource "aws_instance" "front" {
               sleep 10
               
               echo "Pulling frontend image from Docker Hub..."
-              docker pull corentin123/forum-frontend:latest
+              docker pull corentin123/forum-frontend:${var.docker_tag}
               
-              echo "Running container..."
-              docker run -d -p 80:80 --name frontend corentin123/forum-frontend:latest
+              echo "Running container with API URL..."
+              docker run -d -p 80:80 --name frontend \
+                -e API_URL=http://${aws_instance.api.public_ip}:3000 \
+                corentin123/forum-frontend:${var.docker_tag}
               
               echo "User-data script completed!"
               docker ps

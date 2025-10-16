@@ -10,9 +10,14 @@ dotenv.config();
 const app = express();
 
 // ✅ Autoriser le front à accéder à l'API
+// En production, l'origine est définie par variable d'environnement
+const allowedOrigins = process.env.CORS_ORIGIN 
+  ? process.env.CORS_ORIGIN.split(',') 
+  : ["http://localhost:8080"];
+
 app.use(
   cors({
-    origin: ["http://localhost:8080"], // autorise ton front local
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
   }),
 );
@@ -35,6 +40,7 @@ const createTable = async () => {
 
 createTable();
 
-app.listen(process.env.PORT, () => {
-  console.log(`🚀 API running on port ${process.env.PORT}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 API running on port ${PORT}`);
 });

@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000'; // à adapter plus tard sur AWS
+// L'URL de l'API est injectée au moment du déploiement via une variable d'environnement
+const API_URL = window.API_URL || 'http://localhost:3000'; // Fallback pour développement local
 
 async function fetchMessages() {
   try {
