@@ -11,8 +11,8 @@ const app = express();
 
 // ✅ Autoriser le front à accéder à l'API
 // En production, l'origine est définie par variable d'environnement
-const allowedOrigins = process.env.CORS_ORIGIN 
-  ? process.env.CORS_ORIGIN.split(",") 
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",")
   : ["http://localhost:8080"];
 
 app.use(
