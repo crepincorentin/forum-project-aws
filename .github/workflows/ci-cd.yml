@@ -155,24 +155,6 @@ jobs:
         working-directory: terraform
         run: terraform init
 
-      - name: Configure AWS CLI for import
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Import existing resources (if needed)
-        working-directory: terraform
-        continue-on-error: true
-        run: |
-          # Essayer d'importer le security group s'il existe
-          SG_ID=$(aws ec2 describe-security-groups --filters "Name=group-name,Values=forum-sg" --query "SecurityGroups[0].GroupId" --output text 2>/dev/null || echo "")
-          if [ "$SG_ID" != "" ] && [ "$SG_ID" != "None" ]; then
-            echo "Security group forum-sg trouvé: $SG_ID"
-            terraform import aws_security_group.forum_sg $SG_ID || echo "Import échoué ou déjà importé"
-          fi
-
       - name: Terraform Apply
         id: terraform
         working-directory: terraform
