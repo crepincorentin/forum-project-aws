@@ -8,13 +8,13 @@ terraform {
 
   required_version = ">= 1.5.0"
 
-  # (Optionnel) Terraform Cloud backend
-#   backend "remote" {
-#     organization = "ton_organisation_terraform_cloud"
-#     workspaces {
-#       name = "forum-anonyme"
-#     }
-#   }
+  cloud {
+    organization = "corentin-forum"  # Remplacez par VOTRE organisation
+  
+    workspaces {
+      name = "forum-aws"
+    }
+  }
 }
 
 provider "aws" {

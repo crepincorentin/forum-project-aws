@@ -290,10 +290,6 @@ Après le déploiement, le pipeline affiche :
 - 🚫 Clés SSH exclues du dépôt
 - 🌐 CORS configuré dynamiquement
 
-## 📄 Licence
-
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
-
 ## 👤 Auteur
 
 **Corentin Crepin**
