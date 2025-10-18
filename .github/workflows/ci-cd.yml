@@ -173,15 +173,11 @@ jobs:
             terraform import aws_security_group.forum_sg $SG_ID || echo "Import échoué ou déjà importé"
           fi
 
-      - name: Terraform Plan
-        working-directory: terraform
-        run: terraform plan -out=tfplan -var="docker_tag=${{ needs.build.outputs.short_sha }}"
-
       - name: Terraform Apply
         id: terraform
         working-directory: terraform
         run: |
-          terraform apply -auto-approve tfplan
+          terraform apply -auto-approve -var="docker_tag=${{ needs.build.outputs.short_sha }}"
           echo "front_public_ip=$(terraform output -raw front_public_ip)" >> $GITHUB_OUTPUT
           echo "api_public_ip=$(terraform output -raw api_public_ip)" >> $GITHUB_OUTPUT
 
