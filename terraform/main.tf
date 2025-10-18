@@ -9,7 +9,7 @@ terraform {
   required_version = ">= 1.5.0"
 
   cloud {
-    organization = "corentin-forum"  # Remplacez par VOTRE organisation
+    organization = "corentin-forum"
   
     workspaces {
       name = "forum-aws"
